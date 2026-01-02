@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Regime Analyzer</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: black;
+
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+        }
+
+        button {
+            background-color: #f5c400; /* yellow */
+    color: #000;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+        }
+
+        fieldset {
+            margin-top: 15px;
+        }
+
+        #analyze {
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        #result {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Checkbox layout */
+.checkbox-group {
+    border: 1px solid #444;
+    padding: 15px;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* Prevent checkbox from stretching */
+.checkbox-row input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* Checkbox color */
+input[type="checkbox"] {
+    accent-color: #f5c400;
+}
+
+/* Legend styling */
+legend {
+    padding: 0 8px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form id="formdata">
+
+            <label>
+                Gold Price:
+                <input type="text" id="gold" placeholder="e.g. 1985">
+            </label>
+
+            <label>
+                Oil Price:
+                <input type="text" id="oil" placeholder="e.g. 82.50">
+            </label>
+
+            <label>
+                Index Value:
+                <input type="text" id="index_value" placeholder="20000">
+            </label>
+
+            <label>
+                Interest Rate (10Y):
+                <input type="text" id="intrest" placeholder="e.g. 4.25%">
+            </label>
+
+           <fieldset class="checkbox-group">
+    <legend>How did your company do?</legend>
+
+    <label class="checkbox-row">
+        <input type="checkbox" id="beatEarnings">
+        <span>They crushed it.</span>
+    </label>
+
+    <label class="checkbox-row">
+        <input type="checkbox" id="theyFailed">
+        <span>They flopped.</span>
+    </label>
+</fieldset>
+
+            <label>
+                Dollar Index (DXY):
+                <input type="text" id="dollar" placeholder="e.g. 103.2">
+            </label>
+
+            <label>
+                Bitcoin Price:
+                <input type="text" id="bitcoin" placeholder="e.g. 42000">
+            </label>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <button id="analyze" type="button">Analyze</button>
+
+        <h2>In this type of market it’s:</h2>
+        <p id="result"></p>
+
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
