@@ -14,7 +14,6 @@
             align-items: center;
             font-family: Arial, sans-serif;
             background: black;
-
         }
 
         .container {
@@ -26,7 +25,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        form label {
+        label {
             display: block;
             margin-bottom: 12px;
         }
@@ -38,20 +37,36 @@
         }
 
         button {
-            background-color: #f5c400; /* yellow */
-    color: #000;
-    border: none;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
+            background-color: #f5c400;
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
         }
 
         fieldset {
             margin-top: 15px;
+            border: 1px solid #444;
+            padding: 15px;
         }
 
-        #analyze {
-            margin-top: 20px;
+        legend {
+            font-weight: bold;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        input[type="checkbox"] {
+            accent-color: #f5c400;
+            width: auto;
         }
 
         h2 {
@@ -62,98 +77,61 @@
         #result {
             text-align: center;
             font-weight: bold;
+            margin-top: 10px;
         }
-
-        /* Checkbox layout */
-.checkbox-group {
-    border: 1px solid #444;
-    padding: 15px;
-}
-
-.checkbox-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-
-/* Prevent checkbox from stretching */
-.checkbox-row input[type="checkbox"] {
-    width: auto;
-    margin: 0;
-}
-
-/* Checkbox color */
-input[type="checkbox"] {
-    accent-color: #f5c400;
-}
-
-/* Legend styling */
-legend {
-    padding: 0 8px;
-    font-weight: bold;
-}
-
     </style>
 </head>
 
 <body>
-
     <div class="container">
 
-        <form id="formdata">
+        <label>
+            Gold Price:
+            <input type="number" id="gold" placeholder="1985">
+        </label>
 
-            <label>
-                Gold Price:
-                <input type="text" id="gold" placeholder="e.g. 1985">
+        <label>
+            Oil Price:
+            <input type="number" id="oil" placeholder="82.5">
+        </label>
+
+        <label>
+            Index Value:
+            <input type="number" id="index_value" placeholder="20000">
+        </label>
+
+        <label>
+            Interest Rate (10Y):
+            <input type="number" id="intrest" placeholder="4.25">
+        </label>
+
+        <fieldset>
+            <legend>Company Performance</legend>
+
+            <label class="checkbox-row">
+                <input type="checkbox" id="beatEarnings">
+                <span>They crushed earnings</span>
             </label>
 
-            <label>
-                Oil Price:
-                <input type="text" id="oil" placeholder="e.g. 82.50">
+            <label class="checkbox-row">
+                <input type="checkbox" id="theyFailed">
+                <span>They missed earnings</span>
             </label>
+        </fieldset>
 
-            <label>
-                Index Value:
-                <input type="text" id="index_value" placeholder="20000">
-            </label>
+        <label>
+            Dollar Index (DXY):
+            <input type="number" id="dollar" placeholder="103.2">
+        </label>
 
-            <label>
-                Interest Rate (10Y):
-                <input type="text" id="intrest" placeholder="e.g. 4.25%">
-            </label>
+        <label>
+            Bitcoin Price:
+            <input type="number" id="bitcoin" placeholder="42000">
+        </label>
 
-           <fieldset class="checkbox-group">
-    <legend>How did your company do?</legend>
+        <button id="analyze">Analyze Market</button>
 
-    <label class="checkbox-row">
-        <input type="checkbox" id="beatEarnings">
-        <span>They crushed it.</span>
-    </label>
-
-    <label class="checkbox-row">
-        <input type="checkbox" id="theyFailed">
-        <span>They flopped.</span>
-    </label>
-</fieldset>
-
-            <label>
-                Dollar Index (DXY):
-                <input type="text" id="dollar" placeholder="e.g. 103.2">
-            </label>
-
-            <label>
-                Bitcoin Price:
-                <input type="text" id="bitcoin" placeholder="e.g. 42000">
-            </label>
-
-            <button type="submit">Submit</button>
-        </form>
-
-        <button id="analyze" type="button">Analyze</button>
-
-        <h2>In this type of market it’s:</h2>
+        <h2>Market Regime</h2>
         <p id="result"></p>
 
     </div>
