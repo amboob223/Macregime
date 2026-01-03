@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dollar = Number(document.getElementById("dollar").value);
         const bitcoin = Number(document.getElementById("bitcoin").value);
         const indexValue = Number(document.getElementById("index_value").value);
-        const beatEarnings = document.getElementById("beatEarnings").checked;
+        // const beatEarnings = document.getElementById("beatEarnings").checked;
 
         // -------------------------
         // VALIDATION
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dollarIndex,
             bitcoinIndex,
             intrest,
-            beatEarnings
+            // beatEarnings
         });
 
         // -------------------------
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (intrest > 0) score += weights.intrest;
 
-        if (beatEarnings) score -= 0.05; // sentiment boost
+        // if (beatEarnings) score -= 0.05; // sentiment boost
 
         // -------------------------
         // REGIME CLASSIFICATION
