@@ -3,17 +3,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const analyzeBtn = document.getElementById("analyze");
     const resultBox = document.getElementById("result");
 
+    // -------------------------
+    // INPUT NORMALIZATION HELPERS
+    // -------------------------
+
+    // Normalize absolute numeric values (prices, index values)
+    function normalizeNumber(input) {
+        if (input === "" || input === null || input === undefined) return null;
+        if (typeof input === "string") input = input.replace(/,/g, "");
+        const num = Number(input);
+        return isNaN(num) ? null : num;
+    }
+
+    // Normalize percent values (interest rates, ratios)
+    function normalizePercent(input) {
+        if (input === "" || input === null || input === undefined) return null;
+
+        if (typeof input === "string" && input.includes("%")) {
+            return Number(input.replace("%", "")) / 100;
+        }
+
+        const num = Number(input);
+        if (isNaN(num)) return null;
+
+        // Assume values > 1 are percentages (e.g. 5 = 5%)
+        return num > 1 ? num / 100 : num;
+    }
+
     analyzeBtn.addEventListener("click", () => {
 
         // -------------------------
-        // READ INPUT VALUES
+        // READ + NORMALIZE INPUTS
         // -------------------------
-        const gold = Number(document.getElementById("gold").value);
-        const oil = Number(document.getElementById("oil").value);
-        const intrest = Number(document.getElementById("intrest").value);
-        const dollar = Number(document.getElementById("dollar").value);
-        const bitcoin = Number(document.getElementById("bitcoin").value);
-        const indexValue = Number(document.getElementById("index_value").value);
+        const gold = normalizeNumber(document.getElementById("gold").value);
+        const oil = normalizeNumber(document.getElementById("oil").value);
+        const intrest = normalizePercent(document.getElementById("intrest").value);
+        const dollar = normalizeNumber(document.getElementById("dollar").value);
+        const bitcoin = normalizeNumber(document.getElementById("bitcoin").value);
+        const indexValue = normalizeNumber(document.getElementById("index_value").value);
         // const beatEarnings = document.getElementById("beatEarnings").checked;
 
         // -------------------------
@@ -25,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // -------------------------
-        // ECONOMIC RATIOS
+        // ECONOMIC RATIOS (STANDARDIZED)
         // -------------------------
         const goldIndex = gold / indexValue;
         const oilIndex = oil / indexValue;
@@ -37,8 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             oilIndex,
             dollarIndex,
             bitcoinIndex,
-            intrest,
-            // beatEarnings
+            intrest
         });
 
         // -------------------------
@@ -69,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (intrest > 0) score += weights.intrest;
 
-        // if (beatEarnings) score -= 0.05; // sentiment boost
+        // if (beatEarnings) score -= 0.05;
 
         // -------------------------
         // REGIME CLASSIFICATION
